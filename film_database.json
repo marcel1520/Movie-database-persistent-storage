@@ -1,0 +1,67 @@
+{
+    "12 Angry Men": {
+        "title": "12 Angry Men",
+        "release_year": 1957,
+        "rating": 8.9
+    },
+    "The Godfather": {
+        "title": "The Godfather",
+        "release_year": 1972,
+        "rating": 9.2
+    },
+    "The Godfather: Part II": {
+        "title": "The Godfather: Part II",
+        "release_year": 1974,
+        "rating": 9.0
+    },
+    "Halloween": {
+        "title": "Halloween",
+        "release_year": 1978,
+        "rating": 8.0
+    },
+    "Star Wars: Episode V": {
+        "title": "Star Wars: Episode V",
+        "release_year": 1980,
+        "rating": 8.7
+    },
+    "Schindler's List": {
+        "title": "Schindler's List",
+        "release_year": 1993,
+        "rating": 8.9
+    },
+    "The Shawshank Redemption": {
+        "title": "The Shawshank Redemption",
+        "release_year": 1994,
+        "rating": 9.5
+    },
+    "Pulp Fiction": {
+        "title": "Pulp Fiction",
+        "release_year": 1994,
+        "rating": 9.5
+    },
+    "Forrest Gump": {
+        "title": "Forrest Gump",
+        "release_year": 1994,
+        "rating": 8.8
+    },
+    "Starship Troopers": {
+        "title": "Starship Troopers",
+        "release_year": 1999,
+        "rating": 8.1
+    },
+    "The Room": {
+        "title": "The Room",
+        "release_year": 2003,
+        "rating": 3.6
+    },
+    "The Dark Knight": {
+        "title": "The Dark Knight",
+        "release_year": 2008,
+        "rating": 9.0
+    },
+    "Everything Everywhere All At Once": {
+        "title": "Everything Everywhere All At Once",
+        "release_year": 2022,
+        "rating": 8.9
+    }
+}
