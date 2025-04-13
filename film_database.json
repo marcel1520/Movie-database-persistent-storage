@@ -24,6 +24,11 @@
         "release_year": 1980,
         "rating": 8.7
     },
+    "The Terminator": {
+        "title": "The Terminator",
+        "release_year": 1984,
+        "rating": 8.1
+    },
     "Schindler's List": {
         "title": "Schindler's List",
         "release_year": 1993,

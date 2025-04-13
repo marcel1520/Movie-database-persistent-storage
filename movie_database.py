@@ -4,20 +4,24 @@ import json
 
 
 def header(header_line):
+    """Return the given header line for display."""
     return header_line
 
 
 def menu(choices_menu):
+    """Return the given menu for display."""
     return choices_menu
 
 
 def get_movies_from_film_database(film_database):
+    """Load and return movie data from a given JSON file."""
     with open(film_database, "r") as data_file:
         database_content = json.load(data_file)
         return database_content
 
 
 def option_1_display_dictionary():
+    """Return a string listing all movies in the database."""
     with open("film_database.json", "r") as file:
         films = json.load(file)
     all_films = ""
@@ -27,6 +31,7 @@ def option_1_display_dictionary():
 
 
 def save_movies(updated_movies):
+    """Save updated movie data to the JSON file and return the saved dictionary."""
     form_movies_file = json.dumps(updated_movies, indent=4)
     with open("film_database.json", "w") as movies_file:
         movies_file.write(form_movies_file)
@@ -34,11 +39,12 @@ def save_movies(updated_movies):
         return conv_dict
 
 
-def option_2_movie_adding():
+def option_2_movie_adding(title, year, rating):
+    """Prompt user to add a new movie and update the database."""
     film_database = "film_database.json"
-    add_title = input("Enter title: ").strip()
-    add_year = int(input("Enter year: "))
-    add_rating = float(input("Enter rating: "))
+    add_title = input(title).strip()
+    add_year = int(input(year))
+    add_rating = float(input(rating))
     movies_database_get = get_movies_from_film_database(film_database)
     movies_database_get[add_title] = {
         "title": add_title,
@@ -51,6 +57,7 @@ def option_2_movie_adding():
 
 
 def get_original_movie_name(title, movie_dict):
+    """Find and return the original movie key name matching the input title."""
     original_movie_name = ""
     for key in movie_dict.keys():
         if key.lower() == title:
@@ -58,9 +65,10 @@ def get_original_movie_name(title, movie_dict):
     return original_movie_name
 
 
-def option_3_movie_delete():
+def option_3_movie_delete(title):
+    """Delete a movie from the database based on user input title."""
     film_database = "film_database.json"
-    delete_title = input("Enter title: ").strip().lower()
+    delete_title = input(title).strip().lower()
     movies_database_get = get_movies_from_film_database(film_database)
     original_movie_name = get_original_movie_name(delete_title, movies_database_get)
     movies_database_get.pop(original_movie_name)
@@ -68,11 +76,12 @@ def option_3_movie_delete():
     return None
 
 
-def option_4_movie_update():
+def option_4_movie_update(title, year, rating):
+    """Update a movie's details in the database."""
     film_database = "film_database.json"
-    update_title = input("Enter title: ").strip().lower()
-    release_year = int(input("Enter release year: "))
-    update_rating = float(input("Enter rating: "))
+    update_title = input(title).strip().lower()
+    release_year = int(input(rating))
+    update_rating = float(input(year))
     movies_database_get = get_movies_from_film_database(film_database)
     original_movie_name = get_original_movie_name(update_title, movies_database_get)
     movies_database_get[original_movie_name] = {
@@ -85,11 +94,13 @@ def option_4_movie_update():
 
 
 def option_5_get_stats(dictionary_films):
+    """Display statistical information about movies in the database:"""
     if len(dictionary_films) == 0:
         print_info = "\nNo movies in database\n"
         return print_info
     else:
         def get_average():
+            """- Average rating"""
             val_list = []
             average_rating = 0
             for val in dictionary_films.values():
@@ -102,6 +113,7 @@ def option_5_get_stats(dictionary_films):
 
 
         def get_median():
+            """- Median rating"""
             val_list = []
             for val in dictionary_films.values():
                 rating = val["rating"]
@@ -120,6 +132,7 @@ def option_5_get_stats(dictionary_films):
 
 
         def get_best_worst_ratings(list_of_vals):
+            """- Best and worst rated movies"""
             highest_rating = max(list_of_vals)
             lowest_rating = min(list_of_vals)
             best_list = []
@@ -142,12 +155,14 @@ def option_5_get_stats(dictionary_films):
 
 
 def option_6_pick_random_movie(dictionary_films):
+    """Return a randomly selected movie from the database."""
     random_item = random.choices(list(dictionary_films.values()))
     display_random_choice = f"Random Choice: {random_item[0]["title"]} from {random_item[0]["release_year"]} rated {random_item[0]["rating"]}."
     return display_random_choice
 
 
 def option_7_search_movie(dictionary_films):
+    """Search for movies that contain a given keyword in the title."""
     dict_lower_keys = {key.lower(): value for key, value in dictionary_films.items()}
     user_input_search_movie = input("\nEnter part of movie name: ").lower()
     print_info = ""
@@ -158,9 +173,12 @@ def option_7_search_movie(dictionary_films):
 
 
 def option_8_sort_dict_by_rating(dictionary_films):
+    """Sort the movie database by rating (descending) and return a formatted string."""
     print(dictionary_films)
     with open("film_database.json", "r") as file:
         films_database = json.load(file)
+
+
     def get_ratings_list(rat_dict):
         ratings_list = []
         for key, val in rat_dict.items():
@@ -205,6 +223,7 @@ def option_8_sort_dict_by_rating(dictionary_films):
 
 
 def option_9_sort_dict_by_year(dictionary_films):
+    """Sort the movie database by release year (ascending) and return a formatted string."""
     with open("film_database.json", "r") as file:
         films_database = json.load(file)
     def get_years_list(dict_films):
@@ -250,6 +269,7 @@ def option_9_sort_dict_by_year(dictionary_films):
 
 
 def get_valid_choice(user_prompt, min_val=0, max_val=9):
+    """Prompt user for a valid integer choice within the given range."""
     while True:
         try:
             user_choice = int(input(user_prompt))
@@ -261,9 +281,9 @@ def get_valid_choice(user_prompt, min_val=0, max_val=9):
             print("Enter a valid choice in range (0-9): ")
 
 
-def get_user_input():
+def get_user_input(title, year, rating):
+    """Handle user choice logic and trigger the corresponding function."""
     dictionary_films = get_movies_from_film_database("film_database.json")
-
     user_choice = get_valid_choice("Enter choice in range (0-9): ")
     if user_choice == 0:
         exit()
@@ -272,13 +292,13 @@ def get_user_input():
         option_1 = option_1_display_dictionary()
         return option_1
     elif user_choice == 2:
-        option_2_movie_adding()
+        option_2_movie_adding(title, year, rating)
         return None
     elif user_choice == 3:
-        option_3_movie_delete()
+        option_3_movie_delete(title)
         return None
     elif user_choice == 4:
-        option_4_movie_update()
+        option_4_movie_update(title, year, rating)
         return None
     elif user_choice == 5:
         option_5 = option_5_get_stats(dictionary_films)
@@ -298,6 +318,7 @@ def get_user_input():
 
 
 def main():
+    """Main loop that runs the movie database program."""
     while True:
         title_database = (
             f"\n{'*' * 10 + ' MY MOVIE DATABASE ' + '*' * 10}"
@@ -315,13 +336,15 @@ def main():
             f"8. Movies sorted by rating\n"
             f"9. Movies sorted by year\n"
         )
-
+        title = "Enter title: "
+        year = "Enter year: "
+        rating = "Enter rating: "
 
         line_header = header(title_database)
         print(line_header)
         list_choices = menu(menu_database)
         print(list_choices)
-        user_input_get = get_user_input()
+        user_input_get = get_user_input(title, year, rating)
         if user_input_get:
             print(user_input_get)
         input("Press enter to continue: ")
