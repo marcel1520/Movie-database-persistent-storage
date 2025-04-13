@@ -71,8 +71,12 @@ def option_3_movie_delete(title):
     delete_title = input(title).strip().lower()
     movies_database_get = get_movies_from_film_database(film_database)
     original_movie_name = get_original_movie_name(delete_title, movies_database_get)
-    movies_database_get.pop(original_movie_name)
-    save_movies(movies_database_get)
+    if original_movie_name:
+        movies_database_get.pop(original_movie_name)
+        save_movies(movies_database_get)
+        print(f"{original_movie_name} deleted from database")
+    else:
+        print(f"{delete_title} does not exist in database")
     return None
 
 
